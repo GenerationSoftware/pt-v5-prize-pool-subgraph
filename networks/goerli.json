@@ -1,0 +1,8 @@
+{
+  "network": "goerli",
+  "chainId": "5",
+  "prizePool": {
+    "address": "0x3de3ddb0B06701a586a704E9e808a77a89f9bA14",
+    "startBlock": "8897086"
+  }
+}

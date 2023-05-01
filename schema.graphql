@@ -1,0 +1,33 @@
+type Vault @entity {
+  id: Bytes!
+  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "vault") # prize claims for this draw
+}
+
+# TODO: Figure out the byte business going on with IDs.
+# TODO: Create a User entity. Account is a combo of user + account.
+# TODO: Add chain ID to IDs so we can dedupe in the future when aggregating subgraphs.
+
+type Account @entity {
+  id: Bytes! # user's address
+  prizesWon: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the winner
+  prizesReceived: [PrizeClaim!]! @derivedFrom(field: "winner") # prize claims where this user is the prize recipient
+  fees: [PrizeClaim!]! @derivedFrom(field: "feeRecipient") # prize claim fees earned by this user
+}
+
+type Draw @entity {
+  id: String! # draw ID
+  prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
+}
+
+type PrizeClaim @entity {
+  id: String! # vault ID + winner ID + draw ID + tier + chain ID
+  draw: Draw!
+  vault: Vault!
+  winner: Account!
+  tier: Int!
+  payout: BigInt!
+  fee: BigInt!
+  to: Account!
+  feeRecipient: Account!
+  timestamp: BigInt!
+}
