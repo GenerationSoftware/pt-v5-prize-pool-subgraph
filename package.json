@@ -18,6 +18,7 @@
     "deploy:mainnet:hosted": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ pooltogether/v5-prize-pool-mainnet subgraph.mainnet.yaml",
     "deploy:mainnet:decentralized": "graph deploy --studio v5-prize-pool-mainnet subgraph.mainnet.yaml",
     "deploy:goerli:studio": "graph deploy --studio v5-prize-pool-eth-goerli subgraph.goerli.yaml",
+    "deploy:goerli:hosted": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ pooltogether/v5-prize-pool-mainnet subgraph.goerli.yaml",
     "all-goerli:studio": "yarn clean && yarn prepare:goerli && yarn gen:goerli && yarn deploy:goerli:studio",
     "all-mainnet:hosted": "yarn clean && yarn prepare:mainnet && yarn gen:mainnet && yarn deploy:mainnet:hosted",
     "all-mainnet:decentralized": "yarn clean && yarn prepare:mainnet && yarn gen:mainnet && yarn deploy:mainnet:decentralized",
