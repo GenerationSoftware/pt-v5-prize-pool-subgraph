@@ -34,8 +34,8 @@ Subgraphs are hosted at the following URLs.
 
 Mainnet:
 
-- https://thegraph.com/hosted-service/subgraph/pooltogether/v5-prize-pool-mainnet
+- https://thegraph.com/hosted-service/subgraph/pooltogether/v5-eth-prize-pool
 
 Testnet:
 
-- https://thegraph.com/hosted-service/subgraph/pooltogether/v5-prize-pool-eth-goerli
+- https://thegraph.com/hosted-service/subgraph/pooltogether/v5-eth-goerli-prize-pool

@@ -1,0 +1,7 @@
+{
+  "network": "mumbai",
+  "prizePool": {
+    "address": "0xa32c8f94191c9295634f0034eb2b0e2749e77974",
+    "startBlock": "35352790"
+  }
+}

@@ -4,7 +4,6 @@ import { PrizeClaim } from "../../generated/schema";
 import { loadOrCreateDraw } from "./Draw";
 import { loadOrCreateVault } from "./Vault";
 import { loadOrCreateAccount } from "./Account";
-import { CHAIN_ID } from "../constants/generated";
 
 // Generate ID for PrizeClaim entity
 export const generateCompositeId = (
@@ -12,7 +11,7 @@ export const generateCompositeId = (
   _winnerId: string,
   _drawId: string,
   _tier: string
-): string => `${CHAIN_ID}-${_vaultId}-${_winnerId}-${_drawId}-${_tier}`;
+): string => `${_vaultId}-${_winnerId}-${_drawId}-${_tier}`;
 
 export const createPrizeClaim = (
   _drawId: BigInt,
