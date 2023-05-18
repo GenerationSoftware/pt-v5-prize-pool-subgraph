@@ -4,6 +4,7 @@ node_modules
 subgraph.yaml
 
 subgraph.goerli.yaml
+subgraph.sepolia.yaml
 subgraph.mainnet.yaml
 subgraph.polygon.yaml
 subgraph.mumbai.yaml
