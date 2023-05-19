@@ -12,20 +12,26 @@
 
 Monitors prizes claimed in v5.
 
-### Quick-use:
+## Quick-use:
 
-#### For Mainnet:
+### For Mainnet:
 
 ```sh
 $ yarn all-mainnet
 ```
 
-#### For Testnet:
+### For Testnet:
 
 #### For Goerli:
 
 ```sh
-$ yarn all-goerli
+$ yarn all-goerli:hosted
+```
+
+#### For Sepolia:
+
+```sh
+$ yarn all-sepolia:decentralized
 ```
 
 ### Hosted Subgraphs
@@ -36,6 +42,10 @@ Mainnet:
 
 - https://thegraph.com/hosted-service/subgraph/pooltogether/v5-eth-prize-pool
 
-Testnet:
+Testnet (Ethereum Goerli):
 
 - https://thegraph.com/hosted-service/subgraph/pooltogether/v5-eth-goerli-prize-pool
+
+Testnet (Ethereum Sepolia):
+
+- https://api.studio.thegraph.com/query/41211/v5-prize-pool-eth-sepolia/v0.0.1
