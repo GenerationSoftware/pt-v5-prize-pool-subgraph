@@ -19,8 +19,9 @@ type Draw @entity {
   prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
 }
 
+# Could be: "id: String! # vault ID + winner ID + draw ID + tier + chain ID" (with chainId)
 type PrizeClaim @entity {
-  id: String! # vault ID + winner ID + draw ID + tier + chain ID
+  id: String! # vault ID + winner ID + draw ID + tier
   draw: Draw!
   vault: Vault!
   winner: Account!
