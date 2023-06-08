@@ -48,4 +48,4 @@ Testnet (Ethereum Goerli):
 
 Testnet (Ethereum Sepolia):
 
-- https://api.studio.thegraph.com/query/41211/v5-prize-pool-eth-sepolia/v0.0.1
+- https://api.studio.thegraph.com/query/41211/v5-prize-pool-eth-sepolia/v0.0.2
