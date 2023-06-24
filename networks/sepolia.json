@@ -1,7 +1,7 @@
 {
   "network": "sepolia",
   "prizePool": {
-    "address": "0xC5a77bcb8cD13c5619153d46fB7379c9158a8884",
-    "startBlock": "3610525"
+    "address": "0xA377A589C1957D7777F6eDF1b7C22C911a56e90F",
+    "startBlock": "3754555"
   }
 }
