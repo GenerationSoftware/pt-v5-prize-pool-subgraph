@@ -29,23 +29,13 @@ export class Vault extends Entity {
     }
   }
 
-  static loadInBlock(id: Bytes): Vault | null {
-    return changetype<Vault | null>(
-      store.get_in_block("Vault", id.toHexString())
-    );
-  }
-
   static load(id: Bytes): Vault | null {
     return changetype<Vault | null>(store.get("Vault", id.toHexString()));
   }
 
   get id(): Bytes {
     let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
+    return value!.toBytes();
   }
 
   set id(value: Bytes) {
@@ -54,11 +44,11 @@ export class Vault extends Entity {
 
   get prizeClaims(): Array<string> {
     let value = this.get("prizeClaims");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toStringArray();
-    }
+    return value!.toStringArray();
+  }
+
+  set prizeClaims(value: Array<string>) {
+    this.set("prizeClaims", Value.fromStringArray(value));
   }
 }
 
@@ -80,23 +70,13 @@ export class Account extends Entity {
     }
   }
 
-  static loadInBlock(id: Bytes): Account | null {
-    return changetype<Account | null>(
-      store.get_in_block("Account", id.toHexString())
-    );
-  }
-
   static load(id: Bytes): Account | null {
     return changetype<Account | null>(store.get("Account", id.toHexString()));
   }
 
   get id(): Bytes {
     let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
+    return value!.toBytes();
   }
 
   set id(value: Bytes) {
@@ -105,29 +85,29 @@ export class Account extends Entity {
 
   get prizesWon(): Array<string> {
     let value = this.get("prizesWon");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toStringArray();
-    }
+    return value!.toStringArray();
+  }
+
+  set prizesWon(value: Array<string>) {
+    this.set("prizesWon", Value.fromStringArray(value));
   }
 
   get prizesReceived(): Array<string> {
     let value = this.get("prizesReceived");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toStringArray();
-    }
+    return value!.toStringArray();
+  }
+
+  set prizesReceived(value: Array<string>) {
+    this.set("prizesReceived", Value.fromStringArray(value));
   }
 
   get fees(): Array<string> {
     let value = this.get("fees");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toStringArray();
-    }
+    return value!.toStringArray();
+  }
+
+  set fees(value: Array<string>) {
+    this.set("fees", Value.fromStringArray(value));
   }
 }
 
@@ -149,21 +129,13 @@ export class Draw extends Entity {
     }
   }
 
-  static loadInBlock(id: string): Draw | null {
-    return changetype<Draw | null>(store.get_in_block("Draw", id));
-  }
-
   static load(id: string): Draw | null {
     return changetype<Draw | null>(store.get("Draw", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -172,11 +144,11 @@ export class Draw extends Entity {
 
   get prizeClaims(): Array<string> {
     let value = this.get("prizeClaims");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toStringArray();
-    }
+    return value!.toStringArray();
+  }
+
+  set prizeClaims(value: Array<string>) {
+    this.set("prizeClaims", Value.fromStringArray(value));
   }
 }
 
@@ -198,21 +170,13 @@ export class PrizeClaim extends Entity {
     }
   }
 
-  static loadInBlock(id: string): PrizeClaim | null {
-    return changetype<PrizeClaim | null>(store.get_in_block("PrizeClaim", id));
-  }
-
   static load(id: string): PrizeClaim | null {
     return changetype<PrizeClaim | null>(store.get("PrizeClaim", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -221,11 +185,7 @@ export class PrizeClaim extends Entity {
 
   get draw(): string {
     let value = this.get("draw");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set draw(value: string) {
@@ -234,11 +194,7 @@ export class PrizeClaim extends Entity {
 
   get vault(): Bytes {
     let value = this.get("vault");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
+    return value!.toBytes();
   }
 
   set vault(value: Bytes) {
@@ -247,37 +203,43 @@ export class PrizeClaim extends Entity {
 
   get winner(): Bytes {
     let value = this.get("winner");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
+    return value!.toBytes();
   }
 
   set winner(value: Bytes) {
     this.set("winner", Value.fromBytes(value));
   }
 
+  get recipient(): Bytes {
+    let value = this.get("recipient");
+    return value!.toBytes();
+  }
+
+  set recipient(value: Bytes) {
+    this.set("recipient", Value.fromBytes(value));
+  }
+
   get tier(): i32 {
     let value = this.get("tier");
-    if (!value || value.kind == ValueKind.NULL) {
-      return 0;
-    } else {
-      return value.toI32();
-    }
+    return value!.toI32();
   }
 
   set tier(value: i32) {
     this.set("tier", Value.fromI32(value));
   }
 
+  get prizeIndex(): BigInt {
+    let value = this.get("prizeIndex");
+    return value!.toBigInt();
+  }
+
+  set prizeIndex(value: BigInt) {
+    this.set("prizeIndex", Value.fromBigInt(value));
+  }
+
   get payout(): BigInt {
     let value = this.get("payout");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
+    return value!.toBigInt();
   }
 
   set payout(value: BigInt) {
@@ -286,37 +248,16 @@ export class PrizeClaim extends Entity {
 
   get fee(): BigInt {
     let value = this.get("fee");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
+    return value!.toBigInt();
   }
 
   set fee(value: BigInt) {
     this.set("fee", Value.fromBigInt(value));
   }
 
-  get to(): Bytes {
-    let value = this.get("to");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set to(value: Bytes) {
-    this.set("to", Value.fromBytes(value));
-  }
-
   get feeRecipient(): Bytes {
     let value = this.get("feeRecipient");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
+    return value!.toBytes();
   }
 
   set feeRecipient(value: Bytes) {
@@ -325,11 +266,7 @@ export class PrizeClaim extends Entity {
 
   get timestamp(): BigInt {
     let value = this.get("timestamp");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
+    return value!.toBigInt();
   }
 
   set timestamp(value: BigInt) {

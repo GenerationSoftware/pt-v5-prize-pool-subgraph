@@ -1,7 +1,6 @@
-import { BigInt } from "@graphprotocol/graph-ts";
 import { Draw } from "../../generated/schema";
 
-export const loadOrCreateDraw = (drawId: BigInt): Draw => {
+export const loadOrCreateDraw = (drawId: i32): Draw => {
   const draw = Draw.load(drawId.toString());
 
   if (!!draw) {

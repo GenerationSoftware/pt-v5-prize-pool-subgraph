@@ -23,13 +23,7 @@ dataSources:
         - name: PrizePool
           file: ./abis/PrizePool.json
       eventHandlers:
-        - event: ClaimedPrize(indexed uint32,indexed address,indexed address,uint8,uint152,address,uint96,address)
+        - event: ClaimedPrize(indexed address,indexed address,indexed address,uint16,uint8,uint32,uint152,uint96,address)
           handler: handleClaimedPrize
-        - event: ManagerTransferred(indexed address,indexed address)
-          handler: handleManagerTransferred
-        - event: OwnershipOffered(indexed address)
-          handler: handleOwnershipOffered
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
       file: ./src/mappings/prize-pool.ts
 {{/prizePool}}

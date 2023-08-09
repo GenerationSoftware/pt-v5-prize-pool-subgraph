@@ -23,98 +23,236 @@ export class ClaimedPrize__Params {
     this._event = event;
   }
 
-  get drawId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
   get vault(): Address {
-    return this._event.parameters[1].value.toAddress();
+    return this._event.parameters[0].value.toAddress();
   }
 
   get winner(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get recipient(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get tier(): i32 {
+  get drawId(): i32 {
     return this._event.parameters[3].value.toI32();
   }
 
+  get tier(): i32 {
+    return this._event.parameters[4].value.toI32();
+  }
+
+  get prizeIndex(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
   get payout(): BigInt {
-    return this._event.parameters[4].value.toBigInt();
-  }
-
-  get to(): Address {
-    return this._event.parameters[5].value.toAddress();
-  }
-
-  get fee(): BigInt {
     return this._event.parameters[6].value.toBigInt();
   }
 
+  get fee(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
+  }
+
   get feeRecipient(): Address {
-    return this._event.parameters[7].value.toAddress();
+    return this._event.parameters[8].value.toAddress();
   }
 }
 
-export class ManagerTransferred extends ethereum.Event {
-  get params(): ManagerTransferred__Params {
-    return new ManagerTransferred__Params(this);
+export class ContributePrizeTokens extends ethereum.Event {
+  get params(): ContributePrizeTokens__Params {
+    return new ContributePrizeTokens__Params(this);
   }
 }
 
-export class ManagerTransferred__Params {
-  _event: ManagerTransferred;
+export class ContributePrizeTokens__Params {
+  _event: ContributePrizeTokens;
 
-  constructor(event: ManagerTransferred) {
+  constructor(event: ContributePrizeTokens) {
     this._event = event;
   }
 
-  get previousManager(): Address {
+  get vault(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get newManager(): Address {
-    return this._event.parameters[1].value.toAddress();
+  get drawId(): i32 {
+    return this._event.parameters[1].value.toI32();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
-export class OwnershipOffered extends ethereum.Event {
-  get params(): OwnershipOffered__Params {
-    return new OwnershipOffered__Params(this);
+export class DrawClosed extends ethereum.Event {
+  get params(): DrawClosed__Params {
+    return new DrawClosed__Params(this);
   }
 }
 
-export class OwnershipOffered__Params {
-  _event: OwnershipOffered;
+export class DrawClosed__Params {
+  _event: DrawClosed;
 
-  constructor(event: OwnershipOffered) {
+  constructor(event: DrawClosed) {
     this._event = event;
   }
 
-  get pendingOwner(): Address {
-    return this._event.parameters[0].value.toAddress();
+  get drawId(): i32 {
+    return this._event.parameters[0].value.toI32();
+  }
+
+  get winningRandomNumber(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get numTiers(): i32 {
+    return this._event.parameters[2].value.toI32();
+  }
+
+  get nextNumTiers(): i32 {
+    return this._event.parameters[3].value.toI32();
+  }
+
+  get reserve(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get prizeTokensPerShare(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get drawStartedAt(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
   }
 }
 
-export class OwnershipTransferred extends ethereum.Event {
-  get params(): OwnershipTransferred__Params {
-    return new OwnershipTransferred__Params(this);
+export class DrawManagerSet extends ethereum.Event {
+  get params(): DrawManagerSet__Params {
+    return new DrawManagerSet__Params(this);
   }
 }
 
-export class OwnershipTransferred__Params {
-  _event: OwnershipTransferred;
+export class DrawManagerSet__Params {
+  _event: DrawManagerSet;
 
-  constructor(event: OwnershipTransferred) {
+  constructor(event: DrawManagerSet) {
     this._event = event;
   }
 
-  get previousOwner(): Address {
+  get drawManager(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+}
+
+export class IncreaseClaimRewards extends ethereum.Event {
+  get params(): IncreaseClaimRewards__Params {
+    return new IncreaseClaimRewards__Params(this);
+  }
+}
+
+export class IncreaseClaimRewards__Params {
+  _event: IncreaseClaimRewards;
+
+  constructor(event: IncreaseClaimRewards) {
+    this._event = event;
+  }
+
+  get to(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get newOwner(): Address {
-    return this._event.parameters[1].value.toAddress();
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class IncreaseReserve extends ethereum.Event {
+  get params(): IncreaseReserve__Params {
+    return new IncreaseReserve__Params(this);
+  }
+}
+
+export class IncreaseReserve__Params {
+  _event: IncreaseReserve;
+
+  constructor(event: IncreaseReserve) {
+    this._event = event;
+  }
+
+  get user(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class ReserveConsumed extends ethereum.Event {
+  get params(): ReserveConsumed__Params {
+    return new ReserveConsumed__Params(this);
+  }
+}
+
+export class ReserveConsumed__Params {
+  _event: ReserveConsumed;
+
+  constructor(event: ReserveConsumed) {
+    this._event = event;
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class WithdrawClaimRewards extends ethereum.Event {
+  get params(): WithdrawClaimRewards__Params {
+    return new WithdrawClaimRewards__Params(this);
+  }
+}
+
+export class WithdrawClaimRewards__Params {
+  _event: WithdrawClaimRewards;
+
+  constructor(event: WithdrawClaimRewards) {
+    this._event = event;
+  }
+
+  get to(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get available(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class WithdrawReserve extends ethereum.Event {
+  get params(): WithdrawReserve__Params {
+    return new WithdrawReserve__Params(this);
+  }
+}
+
+export class WithdrawReserve__Params {
+  _event: WithdrawReserve;
+
+  constructor(event: WithdrawReserve) {
+    this._event = event;
+  }
+
+  get to(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 }
 
@@ -173,6 +311,29 @@ export class PrizePool extends ethereum.SmartContract {
     return new PrizePool("PrizePool", address);
   }
 
+  accountedBalance(): BigInt {
+    let result = super.call(
+      "accountedBalance",
+      "accountedBalance():(uint256)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_accountedBalance(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "accountedBalance",
+      "accountedBalance():(uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   balanceOfClaimRewards(_claimer: Address): BigInt {
     let result = super.call(
       "balanceOfClaimRewards",
@@ -188,29 +349,6 @@ export class PrizePool extends ethereum.SmartContract {
       "balanceOfClaimRewards",
       "balanceOfClaimRewards(address):(uint256)",
       [ethereum.Value.fromAddress(_claimer)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  calculatePrizeSize(_tier: i32): BigInt {
-    let result = super.call(
-      "calculatePrizeSize",
-      "calculatePrizeSize(uint8):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_calculatePrizeSize(_tier: i32): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "calculatePrizeSize",
-      "calculatePrizeSize(uint8):(uint256)",
-      [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -346,19 +484,19 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  canaryShares(): BigInt {
-    let result = super.call("canaryShares", "canaryShares():(uint96)", []);
+  canaryShares(): i32 {
+    let result = super.call("canaryShares", "canaryShares():(uint8)", []);
 
-    return result[0].toBigInt();
+    return result[0].toI32();
   }
 
-  try_canaryShares(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("canaryShares", "canaryShares():(uint96)", []);
+  try_canaryShares(): ethereum.CallResult<i32> {
+    let result = super.tryCall("canaryShares", "canaryShares():(uint8)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
+    return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
   claimCount(): BigInt {
@@ -402,17 +540,19 @@ export class PrizePool extends ethereum.SmartContract {
   claimPrize(
     _winner: Address,
     _tier: i32,
-    _to: Address,
+    _prizeIndex: BigInt,
+    _prizeRecipient: Address,
     _fee: BigInt,
     _feeRecipient: Address
   ): BigInt {
     let result = super.call(
       "claimPrize",
-      "claimPrize(address,uint8,address,uint96,address):(uint256)",
+      "claimPrize(address,uint8,uint32,address,uint96,address):(uint256)",
       [
         ethereum.Value.fromAddress(_winner),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
-        ethereum.Value.fromAddress(_to),
+        ethereum.Value.fromUnsignedBigInt(_prizeIndex),
+        ethereum.Value.fromAddress(_prizeRecipient),
         ethereum.Value.fromUnsignedBigInt(_fee),
         ethereum.Value.fromAddress(_feeRecipient)
       ]
@@ -424,17 +564,19 @@ export class PrizePool extends ethereum.SmartContract {
   try_claimPrize(
     _winner: Address,
     _tier: i32,
-    _to: Address,
+    _prizeIndex: BigInt,
+    _prizeRecipient: Address,
     _fee: BigInt,
     _feeRecipient: Address
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "claimPrize",
-      "claimPrize(address,uint8,address,uint96,address):(uint256)",
+      "claimPrize(address,uint8,uint32,address,uint96,address):(uint256)",
       [
         ethereum.Value.fromAddress(_winner),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
-        ethereum.Value.fromAddress(_to),
+        ethereum.Value.fromUnsignedBigInt(_prizeIndex),
+        ethereum.Value.fromAddress(_prizeRecipient),
         ethereum.Value.fromUnsignedBigInt(_fee),
         ethereum.Value.fromAddress(_feeRecipient)
       ]
@@ -446,29 +588,23 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  completeAndStartNextDraw(winningRandomNumber_: BigInt): BigInt {
-    let result = super.call(
-      "completeAndStartNextDraw",
-      "completeAndStartNextDraw(uint256):(uint32)",
-      [ethereum.Value.fromUnsignedBigInt(winningRandomNumber_)]
-    );
+  closeDraw(winningRandomNumber_: BigInt): i32 {
+    let result = super.call("closeDraw", "closeDraw(uint256):(uint16)", [
+      ethereum.Value.fromUnsignedBigInt(winningRandomNumber_)
+    ]);
 
-    return result[0].toBigInt();
+    return result[0].toI32();
   }
 
-  try_completeAndStartNextDraw(
-    winningRandomNumber_: BigInt
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "completeAndStartNextDraw",
-      "completeAndStartNextDraw(uint256):(uint32)",
-      [ethereum.Value.fromUnsignedBigInt(winningRandomNumber_)]
-    );
+  try_closeDraw(winningRandomNumber_: BigInt): ethereum.CallResult<i32> {
+    let result = super.tryCall("closeDraw", "closeDraw(uint256):(uint16)", [
+      ethereum.Value.fromUnsignedBigInt(winningRandomNumber_)
+    ]);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
+    return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
   contributePrizeTokens(_prizeVault: Address, _amount: BigInt): BigInt {
@@ -501,6 +637,21 @@ export class PrizePool extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  drawManager(): Address {
+    let result = super.call("drawManager", "drawManager():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_drawManager(): ethereum.CallResult<Address> {
+    let result = super.tryCall("drawManager", "drawManager():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   drawPeriodSeconds(): BigInt {
@@ -572,18 +723,43 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  firstDrawStartsAt(): BigInt {
+    let result = super.call(
+      "firstDrawStartsAt",
+      "firstDrawStartsAt():(uint64)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_firstDrawStartsAt(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "firstDrawStartsAt",
+      "firstDrawStartsAt():(uint64)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   getContributedBetween(
     _vault: Address,
-    _startDrawIdInclusive: BigInt,
-    _endDrawIdInclusive: BigInt
+    _startDrawIdInclusive: i32,
+    _endDrawIdInclusive: i32
   ): BigInt {
     let result = super.call(
       "getContributedBetween",
-      "getContributedBetween(address,uint32,uint32):(uint256)",
+      "getContributedBetween(address,uint16,uint16):(uint256)",
       [
         ethereum.Value.fromAddress(_vault),
-        ethereum.Value.fromUnsignedBigInt(_startDrawIdInclusive),
-        ethereum.Value.fromUnsignedBigInt(_endDrawIdInclusive)
+        ethereum.Value.fromUnsignedBigInt(
+          BigInt.fromI32(_startDrawIdInclusive)
+        ),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_endDrawIdInclusive))
       ]
     );
 
@@ -592,16 +768,18 @@ export class PrizePool extends ethereum.SmartContract {
 
   try_getContributedBetween(
     _vault: Address,
-    _startDrawIdInclusive: BigInt,
-    _endDrawIdInclusive: BigInt
+    _startDrawIdInclusive: i32,
+    _endDrawIdInclusive: i32
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getContributedBetween",
-      "getContributedBetween(address,uint32,uint32):(uint256)",
+      "getContributedBetween(address,uint16,uint16):(uint256)",
       [
         ethereum.Value.fromAddress(_vault),
-        ethereum.Value.fromUnsignedBigInt(_startDrawIdInclusive),
-        ethereum.Value.fromUnsignedBigInt(_endDrawIdInclusive)
+        ethereum.Value.fromUnsignedBigInt(
+          BigInt.fromI32(_startDrawIdInclusive)
+        ),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_endDrawIdInclusive))
       ]
     );
     if (result.reverted) {
@@ -611,20 +789,20 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  getLastCompletedDrawId(): BigInt {
+  getLastClosedDrawId(): BigInt {
     let result = super.call(
-      "getLastCompletedDrawId",
-      "getLastCompletedDrawId():(uint256)",
+      "getLastClosedDrawId",
+      "getLastClosedDrawId():(uint256)",
       []
     );
 
     return result[0].toBigInt();
   }
 
-  try_getLastCompletedDrawId(): ethereum.CallResult<BigInt> {
+  try_getLastClosedDrawId(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "getLastCompletedDrawId",
-      "getLastCompletedDrawId():(uint256)",
+      "getLastClosedDrawId",
+      "getLastClosedDrawId():(uint256)",
       []
     );
     if (result.reverted) {
@@ -634,39 +812,119 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  getNextDrawId(): BigInt {
-    let result = super.call("getNextDrawId", "getNextDrawId():(uint256)", []);
+  getOpenDrawId(): i32 {
+    let result = super.call("getOpenDrawId", "getOpenDrawId():(uint16)", []);
 
-    return result[0].toBigInt();
+    return result[0].toI32();
   }
 
-  try_getNextDrawId(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "getNextDrawId",
-      "getNextDrawId():(uint256)",
-      []
-    );
+  try_getOpenDrawId(): ethereum.CallResult<i32> {
+    let result = super.tryCall("getOpenDrawId", "getOpenDrawId():(uint16)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
+    return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
-  getTierAccrualDurationInDraws(_tier: i32): BigInt {
+  getTierAccrualDurationInDraws(_tier: i32): i32 {
     let result = super.call(
       "getTierAccrualDurationInDraws",
-      "getTierAccrualDurationInDraws(uint8):(uint32)",
+      "getTierAccrualDurationInDraws(uint8):(uint16)",
       [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
     );
 
-    return result[0].toBigInt();
+    return result[0].toI32();
   }
 
-  try_getTierAccrualDurationInDraws(_tier: i32): ethereum.CallResult<BigInt> {
+  try_getTierAccrualDurationInDraws(_tier: i32): ethereum.CallResult<i32> {
     let result = super.tryCall(
       "getTierAccrualDurationInDraws",
-      "getTierAccrualDurationInDraws(uint8):(uint32)",
+      "getTierAccrualDurationInDraws(uint8):(uint16)",
+      [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toI32());
+  }
+
+  getTierOdds(_tier: i32, _numTiers: i32): BigInt {
+    let result = super.call(
+      "getTierOdds",
+      "getTierOdds(uint8,uint8):(int256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_numTiers))
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getTierOdds(_tier: i32, _numTiers: i32): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getTierOdds",
+      "getTierOdds(uint8,uint8):(int256)",
+      [
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_numTiers))
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getTierPrizeCount(_tier: i32, _numberOfTiers: i32): BigInt {
+    let result = super.call(
+      "getTierPrizeCount",
+      "getTierPrizeCount(uint8,uint8):(uint32)",
+      [
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_numberOfTiers))
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getTierPrizeCount(
+    _tier: i32,
+    _numberOfTiers: i32
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getTierPrizeCount",
+      "getTierPrizeCount(uint8,uint8):(uint32)",
+      [
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_numberOfTiers))
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getTierPrizeCount1(_tier: i32): BigInt {
+    let result = super.call(
+      "getTierPrizeCount",
+      "getTierPrizeCount(uint8):(uint32)",
+      [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getTierPrizeCount1(_tier: i32): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getTierPrizeCount",
+      "getTierPrizeCount(uint8):(uint32)",
       [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
     );
     if (result.reverted) {
@@ -676,20 +934,20 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  getTierLiquidity(_tier: i32): BigInt {
+  getTierPrizeSize(_tier: i32): BigInt {
     let result = super.call(
-      "getTierLiquidity",
-      "getTierLiquidity(uint8):(uint256)",
+      "getTierPrizeSize",
+      "getTierPrizeSize(uint8):(uint96)",
       [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
     );
 
     return result[0].toBigInt();
   }
 
-  try_getTierLiquidity(_tier: i32): ethereum.CallResult<BigInt> {
+  try_getTierPrizeSize(_tier: i32): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "getTierLiquidity",
-      "getTierLiquidity(uint8):(uint256)",
+      "getTierPrizeSize",
+      "getTierPrizeSize(uint8):(uint96)",
       [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
     );
     if (result.reverted) {
@@ -699,20 +957,20 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  getTierPrizeCount(_tier: i32): BigInt {
+  getTierRemainingLiquidity(_tier: i32): BigInt {
     let result = super.call(
-      "getTierPrizeCount",
-      "getTierPrizeCount(uint8):(uint256)",
+      "getTierRemainingLiquidity",
+      "getTierRemainingLiquidity(uint8):(uint256)",
       [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
     );
 
     return result[0].toBigInt();
   }
 
-  try_getTierPrizeCount(_tier: i32): ethereum.CallResult<BigInt> {
+  try_getTierRemainingLiquidity(_tier: i32): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "getTierPrizeCount",
-      "getTierPrizeCount(uint8):(uint256)",
+      "getTierRemainingLiquidity",
+      "getTierRemainingLiquidity(uint8):(uint256)",
       [ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))]
     );
     if (result.reverted) {
@@ -723,15 +981,17 @@ export class PrizePool extends ethereum.SmartContract {
   }
 
   getTotalContributedBetween(
-    _startDrawIdInclusive: BigInt,
-    _endDrawIdInclusive: BigInt
+    _startDrawIdInclusive: i32,
+    _endDrawIdInclusive: i32
   ): BigInt {
     let result = super.call(
       "getTotalContributedBetween",
-      "getTotalContributedBetween(uint32,uint32):(uint256)",
+      "getTotalContributedBetween(uint16,uint16):(uint256)",
       [
-        ethereum.Value.fromUnsignedBigInt(_startDrawIdInclusive),
-        ethereum.Value.fromUnsignedBigInt(_endDrawIdInclusive)
+        ethereum.Value.fromUnsignedBigInt(
+          BigInt.fromI32(_startDrawIdInclusive)
+        ),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_endDrawIdInclusive))
       ]
     );
 
@@ -739,16 +999,41 @@ export class PrizePool extends ethereum.SmartContract {
   }
 
   try_getTotalContributedBetween(
-    _startDrawIdInclusive: BigInt,
-    _endDrawIdInclusive: BigInt
+    _startDrawIdInclusive: i32,
+    _endDrawIdInclusive: i32
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getTotalContributedBetween",
-      "getTotalContributedBetween(uint32,uint32):(uint256)",
+      "getTotalContributedBetween(uint16,uint16):(uint256)",
       [
-        ethereum.Value.fromUnsignedBigInt(_startDrawIdInclusive),
-        ethereum.Value.fromUnsignedBigInt(_endDrawIdInclusive)
+        ethereum.Value.fromUnsignedBigInt(
+          BigInt.fromI32(_startDrawIdInclusive)
+        ),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_endDrawIdInclusive))
       ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getTotalContributionsForClosedDraw(): BigInt {
+    let result = super.call(
+      "getTotalContributionsForClosedDraw",
+      "getTotalContributionsForClosedDraw():(uint256)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getTotalContributionsForClosedDraw(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getTotalContributionsForClosedDraw",
+      "getTotalContributionsForClosedDraw():(uint256)",
+      []
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -776,18 +1061,14 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  getVaultPortion(
-    _vault: Address,
-    startDrawId: BigInt,
-    endDrawId: BigInt
-  ): BigInt {
+  getVaultPortion(_vault: Address, _startDrawId: i32, _endDrawId: i32): BigInt {
     let result = super.call(
       "getVaultPortion",
-      "getVaultPortion(address,uint32,uint32):(int256)",
+      "getVaultPortion(address,uint16,uint16):(int256)",
       [
         ethereum.Value.fromAddress(_vault),
-        ethereum.Value.fromUnsignedBigInt(startDrawId),
-        ethereum.Value.fromUnsignedBigInt(endDrawId)
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_startDrawId)),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_endDrawId))
       ]
     );
 
@@ -796,16 +1077,16 @@ export class PrizePool extends ethereum.SmartContract {
 
   try_getVaultPortion(
     _vault: Address,
-    startDrawId: BigInt,
-    endDrawId: BigInt
+    _startDrawId: i32,
+    _endDrawId: i32
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getVaultPortion",
-      "getVaultPortion(address,uint32,uint32):(int256)",
+      "getVaultPortion(address,uint16,uint16):(int256)",
       [
         ethereum.Value.fromAddress(_vault),
-        ethereum.Value.fromUnsignedBigInt(startDrawId),
-        ethereum.Value.fromUnsignedBigInt(endDrawId)
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_startDrawId)),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_endDrawId))
       ]
     );
     if (result.reverted) {
@@ -887,43 +1168,20 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  grandPrizePeriodDraws(): BigInt {
+  hasOpenDrawFinished(): boolean {
     let result = super.call(
-      "grandPrizePeriodDraws",
-      "grandPrizePeriodDraws():(uint32)",
-      []
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_grandPrizePeriodDraws(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "grandPrizePeriodDraws",
-      "grandPrizePeriodDraws():(uint32)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  hasNextDrawFinished(): boolean {
-    let result = super.call(
-      "hasNextDrawFinished",
-      "hasNextDrawFinished():(bool)",
+      "hasOpenDrawFinished",
+      "hasOpenDrawFinished():(bool)",
       []
     );
 
     return result[0].toBoolean();
   }
 
-  try_hasNextDrawFinished(): ethereum.CallResult<boolean> {
+  try_hasOpenDrawFinished(): ethereum.CallResult<boolean> {
     let result = super.tryCall(
-      "hasNextDrawFinished",
-      "hasNextDrawFinished():(bool)",
+      "hasOpenDrawFinished",
+      "hasOpenDrawFinished():(bool)",
       []
     );
     if (result.reverted) {
@@ -933,14 +1191,20 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  isWinner(_vault: Address, _user: Address, _tier: i32): boolean {
+  isWinner(
+    _vault: Address,
+    _user: Address,
+    _tier: i32,
+    _prizeIndex: BigInt
+  ): boolean {
     let result = super.call(
       "isWinner",
-      "isWinner(address,address,uint8):(bool)",
+      "isWinner(address,address,uint8,uint32):(bool)",
       [
         ethereum.Value.fromAddress(_vault),
         ethereum.Value.fromAddress(_user),
-        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(_prizeIndex)
       ]
     );
 
@@ -950,15 +1214,17 @@ export class PrizePool extends ethereum.SmartContract {
   try_isWinner(
     _vault: Address,
     _user: Address,
-    _tier: i32
+    _tier: i32,
+    _prizeIndex: BigInt
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "isWinner",
-      "isWinner(address,address,uint8):(bool)",
+      "isWinner(address,address,uint8,uint32):(bool)",
       [
         ethereum.Value.fromAddress(_vault),
         ethereum.Value.fromAddress(_user),
-        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier))
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(_prizeIndex)
       ]
     );
     if (result.reverted) {
@@ -991,20 +1257,20 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
-  lastCompletedDrawStartedAt(): BigInt {
+  lastClosedDrawAwardedAt(): BigInt {
     let result = super.call(
-      "lastCompletedDrawStartedAt",
-      "lastCompletedDrawStartedAt():(uint64)",
+      "lastClosedDrawAwardedAt",
+      "lastClosedDrawAwardedAt():(uint64)",
       []
     );
 
     return result[0].toBigInt();
   }
 
-  try_lastCompletedDrawStartedAt(): ethereum.CallResult<BigInt> {
+  try_lastClosedDrawAwardedAt(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "lastCompletedDrawStartedAt",
-      "lastCompletedDrawStartedAt():(uint64)",
+      "lastClosedDrawAwardedAt",
+      "lastClosedDrawAwardedAt():(uint64)",
       []
     );
     if (result.reverted) {
@@ -1014,73 +1280,20 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  manager(): Address {
-    let result = super.call("manager", "manager():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_manager(): ethereum.CallResult<Address> {
-    let result = super.tryCall("manager", "manager():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  multicall(data: Array<Bytes>): Array<Bytes> {
-    let result = super.call("multicall", "multicall(bytes[]):(bytes[])", [
-      ethereum.Value.fromBytesArray(data)
-    ]);
-
-    return result[0].toBytesArray();
-  }
-
-  try_multicall(data: Array<Bytes>): ethereum.CallResult<Array<Bytes>> {
-    let result = super.tryCall("multicall", "multicall(bytes[]):(bytes[])", [
-      ethereum.Value.fromBytesArray(data)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytesArray());
-  }
-
-  nextDrawEndsAt(): BigInt {
-    let result = super.call("nextDrawEndsAt", "nextDrawEndsAt():(uint64)", []);
-
-    return result[0].toBigInt();
-  }
-
-  try_nextDrawEndsAt(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "nextDrawEndsAt",
-      "nextDrawEndsAt():(uint64)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  nextDrawStartsAt(): BigInt {
+  lastClosedDrawEndedAt(): BigInt {
     let result = super.call(
-      "nextDrawStartsAt",
-      "nextDrawStartsAt():(uint64)",
+      "lastClosedDrawEndedAt",
+      "lastClosedDrawEndedAt():(uint64)",
       []
     );
 
     return result[0].toBigInt();
   }
 
-  try_nextDrawStartsAt(): ethereum.CallResult<BigInt> {
+  try_lastClosedDrawEndedAt(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "nextDrawStartsAt",
-      "nextDrawStartsAt():(uint64)",
+      "lastClosedDrawEndedAt",
+      "lastClosedDrawEndedAt():(uint64)",
       []
     );
     if (result.reverted) {
@@ -1088,6 +1301,52 @@ export class PrizePool extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  lastClosedDrawStartedAt(): BigInt {
+    let result = super.call(
+      "lastClosedDrawStartedAt",
+      "lastClosedDrawStartedAt():(uint64)",
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_lastClosedDrawStartedAt(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "lastClosedDrawStartedAt",
+      "lastClosedDrawStartedAt():(uint64)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  nextNumberOfTiers(): i32 {
+    let result = super.call(
+      "nextNumberOfTiers",
+      "nextNumberOfTiers():(uint8)",
+      []
+    );
+
+    return result[0].toI32();
+  }
+
+  try_nextNumberOfTiers(): ethereum.CallResult<i32> {
+    let result = super.tryCall(
+      "nextNumberOfTiers",
+      "nextNumberOfTiers():(uint8)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
   numberOfTiers(): i32 {
@@ -1105,34 +1364,46 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
-  owner(): Address {
-    let result = super.call("owner", "owner():(address)", []);
+  openDrawEndsAt(): BigInt {
+    let result = super.call("openDrawEndsAt", "openDrawEndsAt():(uint64)", []);
 
-    return result[0].toAddress();
+    return result[0].toBigInt();
   }
 
-  try_owner(): ethereum.CallResult<Address> {
-    let result = super.tryCall("owner", "owner():(address)", []);
+  try_openDrawEndsAt(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "openDrawEndsAt",
+      "openDrawEndsAt():(uint64)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  pendingOwner(): Address {
-    let result = super.call("pendingOwner", "pendingOwner():(address)", []);
+  openDrawStartedAt(): BigInt {
+    let result = super.call(
+      "openDrawStartedAt",
+      "openDrawStartedAt():(uint64)",
+      []
+    );
 
-    return result[0].toAddress();
+    return result[0].toBigInt();
   }
 
-  try_pendingOwner(): ethereum.CallResult<Address> {
-    let result = super.tryCall("pendingOwner", "pendingOwner():(address)", []);
+  try_openDrawStartedAt(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "openDrawStartedAt",
+      "openDrawStartedAt():(uint64)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   prizeToken(): Address {
@@ -1153,7 +1424,7 @@ export class PrizePool extends ethereum.SmartContract {
   prizeTokenPerShare(): BigInt {
     let result = super.call(
       "prizeTokenPerShare",
-      "prizeTokenPerShare():(uint256)",
+      "prizeTokenPerShare():(uint128)",
       []
     );
 
@@ -1163,7 +1434,7 @@ export class PrizePool extends ethereum.SmartContract {
   try_prizeTokenPerShare(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "prizeTokenPerShare",
-      "prizeTokenPerShare():(uint256)",
+      "prizeTokenPerShare():(uint128)",
       []
     );
     if (result.reverted) {
@@ -1188,14 +1459,22 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  reserveShares(): BigInt {
-    let result = super.call("reserveShares", "reserveShares():(uint96)", []);
+  reserveForOpenDraw(): BigInt {
+    let result = super.call(
+      "reserveForOpenDraw",
+      "reserveForOpenDraw():(uint256)",
+      []
+    );
 
     return result[0].toBigInt();
   }
 
-  try_reserveShares(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("reserveShares", "reserveShares():(uint96)", []);
+  try_reserveForOpenDraw(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "reserveForOpenDraw",
+      "reserveForOpenDraw():(uint256)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -1203,23 +1482,19 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  setManager(_newManager: Address): boolean {
-    let result = super.call("setManager", "setManager(address):(bool)", [
-      ethereum.Value.fromAddress(_newManager)
-    ]);
+  reserveShares(): i32 {
+    let result = super.call("reserveShares", "reserveShares():(uint8)", []);
 
-    return result[0].toBoolean();
+    return result[0].toI32();
   }
 
-  try_setManager(_newManager: Address): ethereum.CallResult<boolean> {
-    let result = super.tryCall("setManager", "setManager(address):(bool)", [
-      ethereum.Value.fromAddress(_newManager)
-    ]);
+  try_reserveShares(): ethereum.CallResult<i32> {
+    let result = super.tryCall("reserveShares", "reserveShares():(uint8)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
+    return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
   smoothing(): BigInt {
@@ -1237,35 +1512,31 @@ export class PrizePool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  tierShares(): BigInt {
-    let result = super.call("tierShares", "tierShares():(uint96)", []);
+  tierShares(): i32 {
+    let result = super.call("tierShares", "tierShares():(uint8)", []);
 
-    return result[0].toBigInt();
+    return result[0].toI32();
   }
 
-  try_tierShares(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("tierShares", "tierShares():(uint96)", []);
+  try_tierShares(): ethereum.CallResult<i32> {
+    let result = super.tryCall("tierShares", "tierShares():(uint8)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
+    return ethereum.CallResult.fromValue(value[0].toI32());
   }
 
-  totalDrawLiquidity(): BigInt {
-    let result = super.call(
-      "totalDrawLiquidity",
-      "totalDrawLiquidity():(uint256)",
-      []
-    );
+  totalWithdrawn(): BigInt {
+    let result = super.call("totalWithdrawn", "totalWithdrawn():(uint256)", []);
 
     return result[0].toBigInt();
   }
 
-  try_totalDrawLiquidity(): ethereum.CallResult<BigInt> {
+  try_totalWithdrawn(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      "totalDrawLiquidity",
-      "totalDrawLiquidity():(uint256)",
+      "totalWithdrawn",
+      "totalWithdrawn():(uint256)",
       []
     );
     if (result.reverted) {
@@ -1293,6 +1564,49 @@ export class PrizePool extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
+
+  wasClaimed(
+    _vault: Address,
+    _winner: Address,
+    _tier: i32,
+    _prizeIndex: BigInt
+  ): boolean {
+    let result = super.call(
+      "wasClaimed",
+      "wasClaimed(address,address,uint8,uint32):(bool)",
+      [
+        ethereum.Value.fromAddress(_vault),
+        ethereum.Value.fromAddress(_winner),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(_prizeIndex)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_wasClaimed(
+    _vault: Address,
+    _winner: Address,
+    _tier: i32,
+    _prizeIndex: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "wasClaimed",
+      "wasClaimed(address,address,uint8,uint32):(bool)",
+      [
+        ethereum.Value.fromAddress(_vault),
+        ethereum.Value.fromAddress(_winner),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(_tier)),
+        ethereum.Value.fromUnsignedBigInt(_prizeIndex)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
 }
 
 export class ConstructorCall extends ethereum.Call {
@@ -1312,48 +1626,10 @@ export class ConstructorCall__Inputs {
     this._call = call;
   }
 
-  get _prizeToken(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get _twabController(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get _grandPrizePeriodDraws(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get _drawPeriodSeconds(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-
-  get nextDrawStartsAt_(): BigInt {
-    return this._call.inputValues[4].value.toBigInt();
-  }
-
-  get _numberOfTiers(): i32 {
-    return this._call.inputValues[5].value.toI32();
-  }
-
-  get _tierShares(): BigInt {
-    return this._call.inputValues[6].value.toBigInt();
-  }
-
-  get _canaryShares(): BigInt {
-    return this._call.inputValues[7].value.toBigInt();
-  }
-
-  get _reserveShares(): BigInt {
-    return this._call.inputValues[8].value.toBigInt();
-  }
-
-  get _claimExpansionThreshold(): BigInt {
-    return this._call.inputValues[9].value.toBigInt();
-  }
-
-  get _smoothing(): BigInt {
-    return this._call.inputValues[10].value.toBigInt();
+  get params(): ConstructorCallParamsStruct {
+    return changetype<ConstructorCallParamsStruct>(
+      this._call.inputValues[0].value.toTuple()
+    );
   }
 }
 
@@ -1365,29 +1641,49 @@ export class ConstructorCall__Outputs {
   }
 }
 
-export class ClaimOwnershipCall extends ethereum.Call {
-  get inputs(): ClaimOwnershipCall__Inputs {
-    return new ClaimOwnershipCall__Inputs(this);
+export class ConstructorCallParamsStruct extends ethereum.Tuple {
+  get prizeToken(): Address {
+    return this[0].toAddress();
   }
 
-  get outputs(): ClaimOwnershipCall__Outputs {
-    return new ClaimOwnershipCall__Outputs(this);
+  get twabController(): Address {
+    return this[1].toAddress();
   }
-}
 
-export class ClaimOwnershipCall__Inputs {
-  _call: ClaimOwnershipCall;
-
-  constructor(call: ClaimOwnershipCall) {
-    this._call = call;
+  get drawManager(): Address {
+    return this[2].toAddress();
   }
-}
 
-export class ClaimOwnershipCall__Outputs {
-  _call: ClaimOwnershipCall;
+  get drawPeriodSeconds(): BigInt {
+    return this[3].toBigInt();
+  }
 
-  constructor(call: ClaimOwnershipCall) {
-    this._call = call;
+  get firstDrawStartsAt(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get numberOfTiers(): i32 {
+    return this[5].toI32();
+  }
+
+  get tierShares(): i32 {
+    return this[6].toI32();
+  }
+
+  get canaryShares(): i32 {
+    return this[7].toI32();
+  }
+
+  get reserveShares(): i32 {
+    return this[8].toI32();
+  }
+
+  get claimExpansionThreshold(): BigInt {
+    return this[9].toBigInt();
+  }
+
+  get smoothing(): BigInt {
+    return this[10].toBigInt();
   }
 }
 
@@ -1416,16 +1712,20 @@ export class ClaimPrizeCall__Inputs {
     return this._call.inputValues[1].value.toI32();
   }
 
-  get _to(): Address {
-    return this._call.inputValues[2].value.toAddress();
+  get _prizeIndex(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get _prizeRecipient(): Address {
+    return this._call.inputValues[3].value.toAddress();
   }
 
   get _fee(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
+    return this._call.inputValues[4].value.toBigInt();
   }
 
   get _feeRecipient(): Address {
-    return this._call.inputValues[4].value.toAddress();
+    return this._call.inputValues[5].value.toAddress();
   }
 }
 
@@ -1441,20 +1741,20 @@ export class ClaimPrizeCall__Outputs {
   }
 }
 
-export class CompleteAndStartNextDrawCall extends ethereum.Call {
-  get inputs(): CompleteAndStartNextDrawCall__Inputs {
-    return new CompleteAndStartNextDrawCall__Inputs(this);
+export class CloseDrawCall extends ethereum.Call {
+  get inputs(): CloseDrawCall__Inputs {
+    return new CloseDrawCall__Inputs(this);
   }
 
-  get outputs(): CompleteAndStartNextDrawCall__Outputs {
-    return new CompleteAndStartNextDrawCall__Outputs(this);
+  get outputs(): CloseDrawCall__Outputs {
+    return new CloseDrawCall__Outputs(this);
   }
 }
 
-export class CompleteAndStartNextDrawCall__Inputs {
-  _call: CompleteAndStartNextDrawCall;
+export class CloseDrawCall__Inputs {
+  _call: CloseDrawCall;
 
-  constructor(call: CompleteAndStartNextDrawCall) {
+  constructor(call: CloseDrawCall) {
     this._call = call;
   }
 
@@ -1463,15 +1763,15 @@ export class CompleteAndStartNextDrawCall__Inputs {
   }
 }
 
-export class CompleteAndStartNextDrawCall__Outputs {
-  _call: CompleteAndStartNextDrawCall;
+export class CloseDrawCall__Outputs {
+  _call: CloseDrawCall;
 
-  constructor(call: CompleteAndStartNextDrawCall) {
+  constructor(call: CloseDrawCall) {
     this._call = call;
   }
 
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
+  get value0(): i32 {
+    return this._call.outputValues[0].value.toI32();
   }
 }
 
@@ -1513,126 +1813,62 @@ export class ContributePrizeTokensCall__Outputs {
   }
 }
 
-export class MulticallCall extends ethereum.Call {
-  get inputs(): MulticallCall__Inputs {
-    return new MulticallCall__Inputs(this);
+export class IncreaseReserveCall extends ethereum.Call {
+  get inputs(): IncreaseReserveCall__Inputs {
+    return new IncreaseReserveCall__Inputs(this);
   }
 
-  get outputs(): MulticallCall__Outputs {
-    return new MulticallCall__Outputs(this);
+  get outputs(): IncreaseReserveCall__Outputs {
+    return new IncreaseReserveCall__Outputs(this);
   }
 }
 
-export class MulticallCall__Inputs {
-  _call: MulticallCall;
+export class IncreaseReserveCall__Inputs {
+  _call: IncreaseReserveCall;
 
-  constructor(call: MulticallCall) {
+  constructor(call: IncreaseReserveCall) {
     this._call = call;
   }
 
-  get data(): Array<Bytes> {
-    return this._call.inputValues[0].value.toBytesArray();
+  get _amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
   }
 }
 
-export class MulticallCall__Outputs {
-  _call: MulticallCall;
+export class IncreaseReserveCall__Outputs {
+  _call: IncreaseReserveCall;
 
-  constructor(call: MulticallCall) {
-    this._call = call;
-  }
-
-  get results(): Array<Bytes> {
-    return this._call.outputValues[0].value.toBytesArray();
-  }
-}
-
-export class RenounceOwnershipCall extends ethereum.Call {
-  get inputs(): RenounceOwnershipCall__Inputs {
-    return new RenounceOwnershipCall__Inputs(this);
-  }
-
-  get outputs(): RenounceOwnershipCall__Outputs {
-    return new RenounceOwnershipCall__Outputs(this);
-  }
-}
-
-export class RenounceOwnershipCall__Inputs {
-  _call: RenounceOwnershipCall;
-
-  constructor(call: RenounceOwnershipCall) {
+  constructor(call: IncreaseReserveCall) {
     this._call = call;
   }
 }
 
-export class RenounceOwnershipCall__Outputs {
-  _call: RenounceOwnershipCall;
+export class SetDrawManagerCall extends ethereum.Call {
+  get inputs(): SetDrawManagerCall__Inputs {
+    return new SetDrawManagerCall__Inputs(this);
+  }
 
-  constructor(call: RenounceOwnershipCall) {
-    this._call = call;
+  get outputs(): SetDrawManagerCall__Outputs {
+    return new SetDrawManagerCall__Outputs(this);
   }
 }
 
-export class SetManagerCall extends ethereum.Call {
-  get inputs(): SetManagerCall__Inputs {
-    return new SetManagerCall__Inputs(this);
-  }
+export class SetDrawManagerCall__Inputs {
+  _call: SetDrawManagerCall;
 
-  get outputs(): SetManagerCall__Outputs {
-    return new SetManagerCall__Outputs(this);
-  }
-}
-
-export class SetManagerCall__Inputs {
-  _call: SetManagerCall;
-
-  constructor(call: SetManagerCall) {
+  constructor(call: SetDrawManagerCall) {
     this._call = call;
   }
 
-  get _newManager(): Address {
+  get _drawManager(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 }
 
-export class SetManagerCall__Outputs {
-  _call: SetManagerCall;
+export class SetDrawManagerCall__Outputs {
+  _call: SetDrawManagerCall;
 
-  constructor(call: SetManagerCall) {
-    this._call = call;
-  }
-
-  get value0(): boolean {
-    return this._call.outputValues[0].value.toBoolean();
-  }
-}
-
-export class TransferOwnershipCall extends ethereum.Call {
-  get inputs(): TransferOwnershipCall__Inputs {
-    return new TransferOwnershipCall__Inputs(this);
-  }
-
-  get outputs(): TransferOwnershipCall__Outputs {
-    return new TransferOwnershipCall__Outputs(this);
-  }
-}
-
-export class TransferOwnershipCall__Inputs {
-  _call: TransferOwnershipCall;
-
-  constructor(call: TransferOwnershipCall) {
-    this._call = call;
-  }
-
-  get _newOwner(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class TransferOwnershipCall__Outputs {
-  _call: TransferOwnershipCall;
-
-  constructor(call: TransferOwnershipCall) {
+  constructor(call: SetDrawManagerCall) {
     this._call = call;
   }
 }

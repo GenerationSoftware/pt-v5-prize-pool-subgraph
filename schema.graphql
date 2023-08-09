@@ -25,10 +25,11 @@ type PrizeClaim @entity {
   draw: Draw!
   vault: Vault!
   winner: Account!
+  recipient: Account!
   tier: Int!
+  prizeIndex: BigInt!
   payout: BigInt!
   fee: BigInt!
-  to: Account!
   feeRecipient: Account!
   timestamp: BigInt!
 }
