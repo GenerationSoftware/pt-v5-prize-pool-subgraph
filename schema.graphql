@@ -3,8 +3,6 @@ type Vault @entity {
   prizeClaims: [PrizeClaim!]! @derivedFrom(field: "vault") # prize claims for this draw
 }
 
-# TODO: Figure out the byte business going on with IDs.
-# TODO: Create a User entity. Account is a combo of user + account.
 # TODO: Add chain ID to IDs so we can dedupe in the future when aggregating subgraphs.
 
 type Account @entity {
@@ -16,12 +14,12 @@ type Account @entity {
 
 type Draw @entity {
   id: String! # draw ID
+  numericalId: BigInt! # draw ID as integer for sorting in a query
   prizeClaims: [PrizeClaim!]! @derivedFrom(field: "draw") # prize claims for this draw
 }
 
-# Could be: "id: String! # vault ID + winner ID + draw ID + tier + chain ID" (with chainId)
 type PrizeClaim @entity {
-  id: String! # vault ID + winner ID + draw ID + tier
+  id: String! # vault ID + winner ID + draw ID + tier + prizeIndex
   draw: Draw!
   vault: Vault!
   winner: Account!

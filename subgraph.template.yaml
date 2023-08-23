@@ -16,14 +16,11 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - ClaimedPrize
-        - ManagerTransferred
-        - OwnershipOffered
-        - OwnershipTransferred
       abis:
         - name: PrizePool
           file: ./abis/PrizePool.json
       eventHandlers:
-        - event: ClaimedPrize(indexed address,indexed address,indexed address,uint16,uint8,uint32,uint152,uint96,address)
+        - event: ClaimedPrize(indexed address,indexed address,indexed address,uint24,uint8,uint32,uint152,uint96,address)
           handler: handleClaimedPrize
       file: ./src/mappings/prize-pool.ts
 {{/prizePool}}

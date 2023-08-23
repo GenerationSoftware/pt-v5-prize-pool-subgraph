@@ -34,6 +34,12 @@ $ yarn all-goerli:hosted
 $ yarn all-sepolia:decentralized
 ```
 
+#### For Optimism Goerli:
+
+```sh
+$ yarn all-optimism-goerli:decentralized
+```
+
 ### Hosted Subgraphs
 
 Subgraphs are hosted at the following URLs.
@@ -49,3 +55,7 @@ Testnet (Ethereum Goerli):
 Testnet (Ethereum Sepolia):
 
 - https://api.studio.thegraph.com/query/41211/v5-prize-pool-eth-sepolia/v0.0.3
+
+Testnet (Optimism Goerli):
+
+- https://api.studio.thegraph.com/proxy/41211/pt-v5-op-goerli-prize-pool/v.0.0.1
