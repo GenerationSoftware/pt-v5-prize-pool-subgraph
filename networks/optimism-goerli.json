@@ -1,7 +1,7 @@
 {
   "network": "optimism-goerli",
   "prizePool": {
-    "address": "0x6A62cd64Acb8bAb35C21e9114A7F9d97e7FaB987",
-    "startBlock": "13672758"
+    "address": "0xC64bb8Fe4f023B650940D05E79c35454e12A111F",
+    "startBlock": "13999450"
   }
 }
