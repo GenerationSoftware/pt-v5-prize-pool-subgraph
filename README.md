@@ -20,6 +20,12 @@ Monitors prizes claimed in v5.
 $ yarn all-mainnet
 ```
 
+### For Optimism:
+
+```sh
+$ yarn all-optimism:decentralized
+```
+
 ### For Testnet:
 
 #### For Goerli:
@@ -44,9 +50,9 @@ $ yarn all-optimism-goerli:decentralized
 
 Subgraphs are hosted at the following URLs.
 
-Mainnet:
+Optimism:
 
-- https://thegraph.com/hosted-service/subgraph/pooltogether/v5-eth-prize-pool
+- https://api.studio.thegraph.com/query/41211/pt-v5-optimism-prize-pool/v0.0.1
 
 Testnet (Ethereum Goerli):
 
